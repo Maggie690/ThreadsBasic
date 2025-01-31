@@ -1,18 +1,14 @@
 package com.example;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Shopper extends Thread {
-    static int garlicCount = 0;
-    static Lock pencil = new ReentrantLock();
+    static AtomicInteger garlicCount = new AtomicInteger(0);
 
     @Override
     public void run() {
         for (int i = 0; i < 5; i++) {
-            pencil.lock();
-            garlicCount++;
-            pencil.unlock();
+            garlicCount.incrementAndGet();
 
             System.out.println(Thread.currentThread().getName() + " is thinking");
             try {
