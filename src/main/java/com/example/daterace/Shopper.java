@@ -1,4 +1,4 @@
-package com.example;
+package com.example.daterace;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
