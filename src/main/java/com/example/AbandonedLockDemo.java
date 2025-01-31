@@ -5,8 +5,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 class Philosopher extends Thread {
 
-    private Lock firstChopstick, secondChopstick;
-    private static int sushiCount = 50;
+    private final Lock firstChopstick, secondChopstick;
+    private static int sushiCount = 500_000;
 
     public Philosopher(String name, Lock firstChopstick, Lock secondChopstick) {
         this.setName(name);
@@ -34,7 +34,7 @@ class Philosopher extends Thread {
             firstChopstick.unlock();
         }
 
-        System.out.println(this.getName() + "was able to eat " + eatenSushi);
+        System.out.println(this.getName() + " was able to eat " + eatenSushi);
     }
 }
 
@@ -42,9 +42,10 @@ public class AbandonedLockDemo {
     public static void main(String[] args) {
         Lock chopstickA = new ReentrantLock();
         Lock chopstickB = new ReentrantLock();
-        Lock chopstickC = new ReentrantLock();
-        new Philosopher("Barron", chopstickA, chopstickB).start();
-        new Philosopher("Olivia", chopstickB, chopstickC).start();
-        new Philosopher("Steve", chopstickA, chopstickC).start();
+        for (int i = 0; i < 5000; i++) {
+            new Philosopher("Barron_" + i, chopstickA, chopstickB).start();
+            new Philosopher("Olivia_" + i, chopstickA, chopstickB).start();
+            new Philosopher("Steve_" + i, chopstickA, chopstickB).start();
+        }
     }
 }
