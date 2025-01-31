@@ -1,8 +1,6 @@
 package com.example.daterace;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Menu extends Thread {
     private List ingredients = List.of("kosher salt", "granulated garlic", "onion", "dry mustard", "black pepper", "honey", "meal");
