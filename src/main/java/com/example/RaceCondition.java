@@ -5,8 +5,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class RaceCondition {
+    public static final int NUMBER_OF_SHOPPER = 10;
     public static void main(String[] args) throws InterruptedException {
-        Shopper[] shoppers = new Shopper[10];
+        Shopper[] shoppers = new Shopper[NUMBER_OF_SHOPPER];
         for (int i = 0; i < shoppers.length; i++) {
             shoppers[i] = new Shopper(i % 2 == 0 ? Shopper.MAGGIE : Shopper.OLIVIA);
         }
@@ -52,7 +53,7 @@ class Shopper extends Thread {
         if (isOlivia) {
             bagsOfChips += 3;
         } else {
-            bagsOfChips *= 3;
+            bagsOfChips *= 2;
         }
     }
 }
