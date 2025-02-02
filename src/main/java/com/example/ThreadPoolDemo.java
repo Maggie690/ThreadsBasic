@@ -1,5 +1,7 @@
 package com.example;
 
+import org.springframework.scheduling.config.Task;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,6 +15,18 @@ public class ThreadPoolDemo {
         }
 
         pool.shutdown();
+
+
+        //with lambda
+        ExecutorService executor = Executors.newFixedThreadPool(4);
+        for (int i = 0; i < 5; i++) {
+            final int taskId = i;
+            executor.submit(() -> {
+                System.out.println("Task " + taskId + " " + Thread.currentThread().getName());
+            });
+        }
+
+        executor.shutdown();
     }
 }
 
