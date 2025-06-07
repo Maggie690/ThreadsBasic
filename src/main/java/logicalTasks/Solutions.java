@@ -38,6 +38,20 @@ public class Solutions {
 
         System.out.println(checkForCycle(head) ? "Has cycle" : "Does not contain cycle.");
 
+        //Task 4
+        String word = "Maggie";
+        reverseWord(word);
+    }
+
+    private static void reverseWord(String word) {
+        var letters = word.toCharArray();
+
+        String reversedWord = "";
+        for (int i = letters.length - 1; i >= 0; i--) {
+            reversedWord += String.valueOf(letters[i]);
+        }
+
+        System.out.println(reversedWord);
     }
 
     private static int findMissingNumber(int[] numbers) {
