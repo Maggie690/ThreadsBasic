@@ -1,0 +1,22 @@
+20 Logical Problem-Solving Questions
+
+1. How would you find the missing number in an array of 1 to N, where one number is missing and the others are unique?
+2. Write a program to check if a string is a palindrome or not.
+3. How would you detect if a linked list has a cycle in it?
+4. Write a function to reverse a string without using any built-in functions.
+5. You have two sorted arrays. How would you find the median of the two sorted arrays?
+6. How would you find the first non-repeating character in a string?
+7. Write an algorithm to check whether two strings are anagrams of each other.
+8. Given a matrix, write an algorithm to rotate it 90 degrees clockwise.
+9. How would you find the longest substring without repeating characters?
+10. Write a function to find the maximum sum of a subarray of a given size k.
+11. How would you check if two trees are identical?
+12. Write a program to perform a binary search on a sorted array.
+13. Write an algorithm to find the intersection of two arrays.
+14. How would you find the nth Fibonacci number efficiently?
+15. Write a function that calculates the factorial of a number iteratively and recursively.
+16. How would you merge two sorted linked lists into one sorted list?
+17. Given a list of integers, how would you find the pairs of numbers that sum up to a given target?
+18. Write a function to perform a depth-first search (DFS) on a graph.
+19. How would you find the largest rectangle in a histogram (Largest area of rectangle in a histogram problem)?
+20. Given a string, how would you count the number of vowels and consonants?
