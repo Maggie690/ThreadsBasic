@@ -1,5 +1,7 @@
 package logicalTasks;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +43,26 @@ public class Solutions {
         //Task 4
         String word = "Maggie";
         reverseWord(word);
+
+        //Task 5
+        int[] a = {1, 12, 15, 26, 38};
+        int[] b = {2, 13, 17, 30, 45, 60};
+
+        int[] a1 = {-5, 3, 6, 12, 15};
+        int[] b1 = {-12, -10, -6, -3, 4, 10};
+
+        int[] a2 = {};
+        int[] b2 = {2, 4, 5, 6};
+
+        System.out.println( findMedianInTwoArrays(a2, b2));
+
+    }
+
+    private static double findMedianInTwoArrays(int[] arrayFirst, int[] arraySecond) {
+        int[] result = Arrays.stream(ArrayUtils.addAll(arrayFirst, arraySecond)).sorted().toArray();
+        int size = result.length;
+
+        return  (size % 2 == 0) ? (double) (result[size / 2] + result[size / 2 - 1]) / 2 : result[size / 2];
     }
 
     private static void reverseWord(String word) {
