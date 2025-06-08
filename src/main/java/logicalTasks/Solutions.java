@@ -4,6 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 public class Solutions {
 
@@ -66,6 +67,43 @@ public class Solutions {
         var secondWord = "dog";//"nagaram";
 
         System.out.println(checkTwoWordsAreAnagram(secondWord, firstWord) ? " anagrams" : "not anagrams");
+
+        //Task 13
+        int[] arr0 = {1, 2, 1, 3, 1};
+        int[] arr1 = {3, 1, 3, 4, 1};
+
+        Set<Integer> sortedSet = intersectionArrays(arr0, arr1);
+        sortedSet.forEach(num -> System.out.print(num + " "));
+
+        //Таск 16
+        LinkedList<Integer> numbers0 = new LinkedList<>(List.of(1, 2, 3, 78, 100));
+        LinkedList<Integer> numbers1 = new LinkedList<>(List.of(4, 6, 7, 77, 104, 200, 300));
+
+        sortTwoLinkedLists(numbers0, numbers1).forEach(num -> System.out.print(num + " "));
+
+        //Task 20
+        TreeMap<String, Integer> countLetters = countLetters(word);
+        countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
+
+
+    }
+
+    private static Set<Integer> intersectionArrays(int[] numsLeft, int[] numsRight) {
+        Set<Integer> setLeft = Arrays.stream(numsLeft).boxed().collect(Collectors.toSet());
+        Set<Integer> setRight = Arrays.stream(numsRight).boxed().collect(Collectors.toSet());
+        setLeft.retainAll(setRight);
+
+        return setLeft;
+    }
+
+    private static LinkedList<Integer> sortTwoLinkedLists(LinkedList<Integer> numbers0, LinkedList<Integer> numbers1) {
+        var sortedList = numbers0.stream()
+                .collect(Collectors.toCollection(() -> numbers1))
+                .stream()
+                .sorted()
+                .toList();
+
+        return new LinkedList<>(sortedList);
     }
 
     private static boolean checkTwoWordsAreAnagram(String secondWord, String firstWord) {
