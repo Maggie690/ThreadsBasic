@@ -4,7 +4,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 public class Solutions {
 
@@ -62,6 +61,43 @@ public class Solutions {
         findFirstNonRepeatingLetter(wordTest6);
 
 
+        //Task 7
+        var firstWord = "doo";//"anagram";
+        var secondWord = "dog";//"nagaram";
+
+        System.out.println(checkTwoWordsAreAnagram(secondWord, firstWord) ? " anagrams" : "not anagrams");
+    }
+
+    private static boolean checkTwoWordsAreAnagram(String secondWord, String firstWord) {
+        if (secondWord.length() != firstWord.length()) {
+            return false;
+        }
+
+        TreeMap<String, Integer> countFirstWord = countLetters(firstWord);
+        TreeMap<String, Integer> countSecondWord = countLetters(secondWord);
+
+        if (countSecondWord.size() != countFirstWord.size()) {
+            return false;
+        }
+
+        for (var pair : countSecondWord.entrySet()) {
+            var key = pair.getKey();
+            var value = pair.getValue();
+
+            if (!countFirstWord.containsKey(key) && countFirstWord.get(key) != value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static TreeMap<String, Integer> countLetters(String word) {
+        TreeMap<String, Integer> map = new TreeMap<>();
+        for (var letter : Arrays.stream(word.split("")).toList()) {
+            map.compute(letter, (k, v) -> (v == null ? 1 : map.get(letter) + 1));
+        }
+
+        return map;
     }
 
     private static void findFirstNonRepeatingLetter(String wordTest6) {
