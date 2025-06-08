@@ -2,8 +2,9 @@ package logicalTasks;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 public class Solutions {
 
@@ -54,15 +55,38 @@ public class Solutions {
         int[] a2 = {};
         int[] b2 = {2, 4, 5, 6};
 
-        System.out.println( findMedianInTwoArrays(a2, b2));
+        System.out.println(findMedianInTwoArrays(a2, b2));
 
+        //Task 6
+        String wordTest6 = "treesstr";//"Fibonacci";//"consonants";
+        findFirstNonRepeatingLetter(wordTest6);
+
+
+    }
+
+    private static void findFirstNonRepeatingLetter(String wordTest6) {
+        List<String> letters = new CopyOnWriteArrayList<>(wordTest6.toLowerCase().split(""));
+        List<String> temp = new ArrayList<>();
+
+        Iterator<String> it = letters.iterator();
+        while (it.hasNext()) {
+            var letter = it.next();
+            if (temp.contains(letter)) {
+                temp.remove(letter);
+                letters.remove(letter);
+            } else {
+                temp.add(letter);
+            }
+        }
+
+        System.out.println(temp.isEmpty() ? "Does not contain non-repeating letter." : temp.get(0));
     }
 
     private static double findMedianInTwoArrays(int[] arrayFirst, int[] arraySecond) {
         int[] result = Arrays.stream(ArrayUtils.addAll(arrayFirst, arraySecond)).sorted().toArray();
         int size = result.length;
 
-        return  (size % 2 == 0) ? (double) (result[size / 2] + result[size / 2 - 1]) / 2 : result[size / 2];
+        return (size % 2 == 0) ? (double) (result[size / 2] + result[size / 2 - 1]) / 2 : result[size / 2];
     }
 
     private static void reverseWord(String word) {
