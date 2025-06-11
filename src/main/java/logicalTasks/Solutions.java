@@ -68,12 +68,27 @@ public class Solutions {
 
         System.out.println(checkTwoWordsAreAnagram(secondWord, firstWord) ? " anagrams" : "not anagrams");
 
+        //Task 12
+        int[] arraySorted = {12, 13, 14, 15, 16};
+        int searchedElement = binarySearch(18, arraySorted);
+        System.out.printf((searchedElement == -1 ? "Element does not exist.\n" : "The searched element is at position: %d\n"), searchedElement);
+
         //Task 13
         int[] arr0 = {1, 2, 1, 3, 1};
         int[] arr1 = {3, 1, 3, 4, 1};
 
         Set<Integer> sortedSet = intersectionArrays(arr0, arr1);
         sortedSet.forEach(num -> System.out.print(num + " "));
+        System.out.println();
+
+        //Task 15
+        int fibNum = 5;
+        System.out.print("\nFibonacci for " + fibNum + " /recursive/: ");
+        fib(fibNum);
+
+        System.out.print("\nFibonacci for " + fibNum + "  /dynamic/: ");
+        calcFibonacciDynamic(fibNum);
+        System.out.println();
 
         //Таск 16
         LinkedList<Integer> numbers0 = new LinkedList<>(List.of(1, 2, 3, 78, 100));
@@ -86,6 +101,74 @@ public class Solutions {
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
 
 
+    }
+
+    /**
+     * Recursive
+     * The Fibonacci sequence is the series of numbers where each number is the sum of the two preceding numbers.
+     * For example, 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610,
+     *
+     * @param fibonacciNumber
+     */
+    private static void fib(int fibonacciNumber) {
+        System.out.print(1 + " ");
+        calcFibonacci(fibonacciNumber, 1, 1);
+    }
+
+    private static int calcFibonacci(int fib, int firstNumber, int secondNumber) {
+        if (fib == 1 || fib == 2) {
+            return 1;
+        }
+        System.out.print(secondNumber + " ");
+        return calcFibonacci(fib - 1, secondNumber, firstNumber + secondNumber);
+    }
+
+    /**
+     * Dynamic
+     * The Fibonacci sequence is the series of numbers where each number is the sum of the two preceding numbers.
+     * For example, 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610,
+     *
+     * @param fibNum
+     * @return
+     */
+    private static int calcFibonacciDynamic(int fibNum) {
+        int n0 = 0, n1 = 1, n2 = 0, i;
+        System.out.print(n0 + n1);
+        for (i = 2; i < fibNum; i++) {
+            n2 = n0 + n1;
+            System.out.print(" " + n2);
+            n0 = n1;
+            n1 = n2;
+        }
+
+        return n2;
+    }
+
+    /**
+     * Binary search trees, AVL trees, and other tree-based data structures can also provide efficient searching
+     * with an average time complexity of O(log n). However, they require additional memory to store the tree structure.
+     * Not suitable for small data sets, as the overhead of binary search may outweigh the benefits compared to linear search.
+     *
+     * @param target
+     * @param arr
+     * @return position in array for searched element
+     */
+    private static int binarySearch(int target, int[] arr) {
+        int left = 0, right = arr.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == target) {
+                return mid;
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return -1;
     }
 
     private static Set<Integer> intersectionArrays(int[] numsLeft, int[] numsRight) {
