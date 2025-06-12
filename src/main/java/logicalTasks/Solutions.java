@@ -96,11 +96,45 @@ public class Solutions {
 
         sortTwoLinkedLists(numbers0, numbers1).forEach(num -> System.out.print(num + " "));
 
+        //Таск 17
+        int[] arr2 = {20, 25, 5, 7, 12, 18, 14};
+        int searchedSum = 30;
+        System.out.println("\nFor the searched sum of " + searchedSum + " the numbers are:");
+        findSumOfElements(arr2, searchedSum);
+
+        System.out.println(System.lineSeparator());
+
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
+    }
 
+    private static void findSumOfElements(int[] numbers, int searchedSum) {
+        int tempSum = 0;
+        for (int startIndex = 0; startIndex < numbers.length; startIndex++) {
+            for (int currentIndex = startIndex; currentIndex < numbers.length; currentIndex++) {
 
+                if (tempSum < searchedSum) {
+                    tempSum += numbers[currentIndex];
+                }
+
+                if (tempSum >= searchedSum) {
+                    if (tempSum == searchedSum) {
+                        printResult(numbers, startIndex, currentIndex);
+                    }
+                    tempSum = 0;
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void printResult(int[] numbers, int startIndex, int currentIndex) {
+        StringBuilder sB = new StringBuilder(System.lineSeparator());
+        for (int i = startIndex; i <= currentIndex; i++) {
+            sB.append(numbers[i]).append(" ");
+        }
+        System.out.print(sB);
     }
 
     /**
