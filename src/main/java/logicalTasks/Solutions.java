@@ -71,7 +71,6 @@ public class Solutions {
         //Task 9
         String word9 = "tosolvealgorithmicproblems";
 
-        String temp = "";
         HashSet<String> wordsEqual = new HashSet<>();
         HashMap<Character, Integer> map = new HashMap<>();
         int index = 0, positionReturn = 0;
@@ -86,27 +85,26 @@ public class Solutions {
             }
 
             String subString = word9.substring(positionReturn, index);
-            if (temp.length() <= subString.length()) {
-                if (temp.length() == subString.length()) {
-                    wordsEqual.addAll(List.of(temp, subString));
-                } else {
+            if (wordsEqual.isEmpty()) {
+                wordsEqual.add(subString);
+            } else {
+                if (wordsEqual.stream().iterator().next().length() == subString.length()) {
+                    wordsEqual.add(subString);
+                } else if (wordsEqual.stream().iterator().next().length() < subString.length()) {
                     wordsEqual = new HashSet<>();
-                }
-                temp = subString;
+                    wordsEqual.add(subString);
 
+                }
             }
-           //  System.out.println(" temp----> " + subString);
+
+            System.out.println(" temp----> " + subString);
 
             map = new HashMap<>();
             positionReturn++;
             index = positionReturn;
         }
 
-        if (wordsEqual.isEmpty()) {
-            System.out.println(temp);
-        } else {
-            wordsEqual.forEach(System.out::println);
-        }
+        wordsEqual.forEach(System.out::println);
 
         //Task 12
         int[] arraySorted = {12, 13, 14, 15, 16};
