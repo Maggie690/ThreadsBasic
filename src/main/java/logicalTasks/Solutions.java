@@ -68,6 +68,48 @@ public class Solutions {
 
         System.out.println(checkTwoWordsAreAnagram(secondWord, firstWord) ? " anagrams" : "not anagrams");
 
+        //Task 9
+        String word9 = "tosolvealgorithmicproblems";
+
+        String temp = "";
+        HashSet<String> wordsEqual = new HashSet<>();
+        StringBuilder sB = new StringBuilder();
+        HashMap<Character, Integer> map = new HashMap<>();
+        int index = 0, positionReturn = 0;
+
+        while (index < word9.length()) {
+
+            Character letter = word9.charAt(index);
+            if (!map.containsKey(letter)) {
+                map.put(letter, 1);
+                sB.append(letter);
+                index++;
+                continue;
+            }
+
+            if (temp.length() <= sB.length()) {
+                if (temp.length() == sB.length()) {
+                    wordsEqual.addAll(List.of(temp, sB.toString()));
+                } else {
+                    wordsEqual = new HashSet<>();
+                }
+                temp = sB.toString();
+
+            }
+            //  System.out.println(" temp----> " + sB.toString());
+
+            map = new HashMap<>();
+            sB = new StringBuilder();
+            positionReturn++;
+            index = positionReturn;
+        }
+
+        if (wordsEqual.isEmpty()) {
+            System.out.println(temp);
+        } else {
+            wordsEqual.forEach(System.out::println);
+        }
+
         //Task 12
         int[] arraySorted = {12, 13, 14, 15, 16};
         int searchedElement = binarySearch(18, arraySorted);
@@ -254,6 +296,7 @@ public class Solutions {
 
         return map;
     }
+
 
     private static void findFirstNonRepeatingLetter(String wordTest6) {
         List<String> letters = new CopyOnWriteArrayList<>(wordTest6.toLowerCase().split(""));
