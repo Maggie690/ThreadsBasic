@@ -73,7 +73,6 @@ public class Solutions {
 
         String temp = "";
         HashSet<String> wordsEqual = new HashSet<>();
-        StringBuilder sB = new StringBuilder();
         HashMap<Character, Integer> map = new HashMap<>();
         int index = 0, positionReturn = 0;
 
@@ -82,24 +81,23 @@ public class Solutions {
             Character letter = word9.charAt(index);
             if (!map.containsKey(letter)) {
                 map.put(letter, 1);
-                sB.append(letter);
                 index++;
                 continue;
             }
 
-            if (temp.length() <= sB.length()) {
-                if (temp.length() == sB.length()) {
-                    wordsEqual.addAll(List.of(temp, sB.toString()));
+            String subString = word9.substring(positionReturn, index);
+            if (temp.length() <= subString.length()) {
+                if (temp.length() == subString.length()) {
+                    wordsEqual.addAll(List.of(temp, subString));
                 } else {
                     wordsEqual = new HashSet<>();
                 }
-                temp = sB.toString();
+                temp = subString;
 
             }
-            //  System.out.println(" temp----> " + sB.toString());
+           //  System.out.println(" temp----> " + subString);
 
             map = new HashMap<>();
-            sB = new StringBuilder();
             positionReturn++;
             index = positionReturn;
         }
