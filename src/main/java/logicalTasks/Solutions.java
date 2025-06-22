@@ -68,6 +68,18 @@ public class Solutions {
 
         System.out.println(checkTwoWordsAreAnagram(secondWord, firstWord) ? " anagrams" : "not anagrams");
 
+        //Task 8
+        int matrix[][] = {{1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}};
+
+
+        int[][] matrix90 = rotate90Matrix(matrix);
+
+        System.out.println(Arrays.deepToString(matrix));
+        System.out.println(Arrays.deepToString(matrix90));
+
         //Task 9
         String word9 = "tosOlvealgorithmicproblems";
 
@@ -122,6 +134,24 @@ public class Solutions {
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
+    }
+
+    private static int[][] rotate90Matrix(int[][] matrix) {
+        int col90 = matrix.length - 1;
+        int row90 = 0;
+        int matrix90[][] = new int[matrix.length][matrix[0].length];
+
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                System.out.println(matrix[row][col]);
+                matrix90[row90][col90] = matrix[row][col];
+                row90++;
+            }
+            col90--;
+            row90 = 0;
+        }
+
+        return matrix90;
     }
 
     private static int subArrayMaxSum(int[] numbers, int k) {
