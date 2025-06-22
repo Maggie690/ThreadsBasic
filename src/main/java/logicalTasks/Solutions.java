@@ -69,40 +69,10 @@ public class Solutions {
         System.out.println(checkTwoWordsAreAnagram(secondWord, firstWord) ? " anagrams" : "not anagrams");
 
         //Task 9
-        String word9 = "tosolvealgorithmicproblems";
+        String word9 = "tosOlvealgorithmicproblems";
 
         HashSet<String> wordsEqual = new HashSet<>();
-        HashMap<Character, Integer> map = new HashMap<>();
-        int index = 0, positionReturn = 0;
-
-        while (index < word9.length()) {
-
-            Character letter = word9.charAt(index);
-            if (!map.containsKey(letter)) {
-                map.put(letter, 1);
-                index++;
-                continue;
-            }
-
-            String subString = word9.substring(positionReturn, index);
-            if (wordsEqual.isEmpty()) {
-                wordsEqual.add(subString);
-            } else {
-                if (wordsEqual.stream().iterator().next().length() == subString.length()) {
-                    wordsEqual.add(subString);
-                } else if (wordsEqual.stream().iterator().next().length() < subString.length()) {
-                    wordsEqual = new HashSet<>();
-                    wordsEqual.add(subString);
-
-                }
-            }
-
-            System.out.println(" temp----> " + subString);
-
-            map = new HashMap<>();
-            positionReturn++;
-            index = positionReturn;
-        }
+        wordsEqual = longestSubstring(word9.toLowerCase(), wordsEqual);
 
         wordsEqual.forEach(System.out::println);
 
@@ -145,6 +115,35 @@ public class Solutions {
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
+    }
+
+    private static HashSet<String> longestSubstring(String word, HashSet<String> setEqualLength) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int index = 0, positionReturn = 0;
+
+        while (index < word.length()) {
+
+            Character letter = word.charAt(index);
+            if (!map.containsKey(letter)) {
+                map.put(letter, 1);
+                index++;
+                continue;
+            }
+
+            String subString = word.substring(positionReturn, index);
+
+            if (setEqualLength.isEmpty() || setEqualLength.stream().iterator().next().length() < subString.length()) {
+                setEqualLength = new HashSet<>();
+                setEqualLength.add(subString);
+            } else if (setEqualLength.stream().iterator().next().length() == subString.length()) {
+                setEqualLength.add(subString);
+            }
+
+            map = new HashMap<>();
+            positionReturn++;
+            index = positionReturn;
+        }
+        return setEqualLength;
     }
 
     private static void findSumOfElements(int[] numbers, int searchedSum) {
