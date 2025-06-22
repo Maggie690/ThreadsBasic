@@ -76,6 +76,13 @@ public class Solutions {
 
         wordsEqual.forEach(System.out::println);
 
+        //Task 10
+        int[] arr10 = {100, 200, 300, 400};
+        int k = 4;
+
+        int sum = subArrayMaxSum(arr10, k);
+        System.out.println(sum);
+
         //Task 12
         int[] arraySorted = {12, 13, 14, 15, 16};
         int searchedElement = binarySearch(18, arraySorted);
@@ -115,6 +122,17 @@ public class Solutions {
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
+    }
+
+    private static int subArrayMaxSum(int[] numbers, int k) {
+        int[] numbersSorted = Arrays.stream(numbers).sorted().toArray();
+
+        int sum = 0;
+        for (int i = numbersSorted.length - 1; i >= 0 && k >= 0; i--) {
+            sum += numbersSorted[i];
+            k--;
+        }
+        return sum;
     }
 
     private static HashSet<String> longestSubstring(String word, HashSet<String> setEqualLength) {
