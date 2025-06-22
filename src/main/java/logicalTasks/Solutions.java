@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class Solutions {
 
     private static final int MISSING_NUMBER_DEFAULT_VALUE = -1;
+    private static Map<Integer, Long> memorization = new HashMap<>(Map.of(0, 0l, 1, 1l, 2, 1l));
 
     public static void main(String[] args) {
         //task 1
@@ -108,13 +109,26 @@ public class Solutions {
         sortedSet.forEach(num -> System.out.print(num + " "));
         System.out.println();
 
+        //Task 14
+        int fibNum = 10;
+        System.out.println("\nFibonacci on position " + fibNum + " is: " + fibonacci(fibNum));
+
+        long preTime = System.currentTimeMillis();
+        System.out.printf("Fibonacci on position %s is %s\n", fibNum, fibonacciMemorization(fibNum));
+        long postTime = System.currentTimeMillis();
+        System.out.println("Time: " + (postTime - preTime));
+
+        preTime = System.currentTimeMillis();
+        System.out.printf("Fibonacci on position %s is %s\n", fibNum, fibonacciMemorization(fibNum));
+        postTime = System.currentTimeMillis();
+        System.out.println("Time: " + (postTime - preTime));
+
         //Task 15
-        int fibNum = 5;
         System.out.print("\nFibonacci for " + fibNum + " /recursive/: ");
-        fib(fibNum);
+        fib(fibNum + 1);
 
         System.out.print("\nFibonacci for " + fibNum + "  /dynamic/: ");
-        calcFibonacciDynamic(fibNum);
+        calcFibonacciDynamic(fibNum + 1);
         System.out.println();
 
         //Таск 16
@@ -234,6 +248,24 @@ public class Solutions {
         calcFibonacci(fibonacciNumber, 1, 1);
     }
 
+    /**
+     * This method works well for small values of n,
+     * but it becomes increasingly slow for larger values
+     * because it recalculates the same Fibonacci numbers many times.
+     *
+     * @param number
+     * @return int
+     */
+    private static int fibonacci(int number) {
+        if (number <= 0) {
+            return 0;
+        } else if (number == 1) {
+            return 1;
+        } else {
+            return fibonacci(number - 1) + fibonacci(number - 2);
+        }
+    }
+
     private static int calcFibonacci(int fib, int firstNumber, int secondNumber) {
         if (fib == 1 || fib == 2) {
             return 1;
@@ -261,6 +293,29 @@ public class Solutions {
         }
 
         return n2;
+    }
+
+    /**
+     *
+     * Calculating factorials recursively without memoization is inefficient for large n because it involves recomputing
+     * the fibonacci of numbers multiple times. By using memoization, each factorial value is computed only once.
+     * @param num
+     * @return
+     */
+    private static long fibonacciMemorization(int num) {
+        if (num <= 1) {
+            return num;
+        }
+
+        if (memorization.containsKey(num)) {
+            return memorization.get(num);
+        }
+
+        long result = fibonacciMemorization(num - 1) + fibonacciMemorization(num - 2);
+        memorization.put(num, result);
+
+        return result;
+
     }
 
     /**
