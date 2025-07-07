@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 public class Solutions {
 
     private static final int MISSING_NUMBER_DEFAULT_VALUE = -1;
+    public static final String PRE_ORDER = "Pre-order";
+    public static final String POST_ORDER = "Post-order";
+    public static final String INORDER = "Inorder";
     private static Map<Integer, Long> memorization = new HashMap<>(Map.of(0, 0l, 1, 1l, 2, 1l));
 
     public static void main(String[] args) {
@@ -97,12 +100,17 @@ public class Solutions {
         System.out.println(sum);
 
         //Task 11
-
         TreeNode treeFirst = getTreeNode(1, 2, 3, 4, 5);
         TreeNode treeSecond = getTreeNode(1, 2, 3, 4, 6);
 
         boolean isIdentical = isIdenticalTree(treeFirst, treeSecond);
         System.out.println("Are three identical - " + isIdentical);
+
+        //Task 11.1
+        printTree(PRE_ORDER, treeFirst);
+        printTree(POST_ORDER, treeFirst);
+        printTree(INORDER, treeFirst);
+        printTree("NOT EXIST", treeFirst);
 
         //Task 12
         int[] arraySorted = {12, 13, 14, 15, 16};
@@ -175,6 +183,18 @@ public class Solutions {
         } else {
             return isIdenticalTree(firstTree.left, secondTree.left) && isIdenticalTree(firstTree.right, secondTree.right);
         }
+    }
+
+    private static void printTree(String type, TreeNode tree) {
+        System.out.print(type + ": ");
+
+        switch (type) {
+            case PRE_ORDER -> TreeNode.preorderTraversal(tree);
+            case POST_ORDER -> TreeNode.postorderTraversal(tree);
+            case INORDER -> TreeNode.inorderTraversal(tree);
+            default -> System.out.println("Type printing does not exist");
+        }
+        System.out.println();
     }
 
     private static int[][] rotate90Matrix(int[][] matrix) {
