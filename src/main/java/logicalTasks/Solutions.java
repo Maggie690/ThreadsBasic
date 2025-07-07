@@ -96,6 +96,14 @@ public class Solutions {
         int sum = subArrayMaxSum(arr10, k);
         System.out.println(sum);
 
+        //Task 11
+
+        TreeNode treeFirst = getTreeNode(1, 2, 3, 4, 5);
+        TreeNode treeSecond = getTreeNode(1, 2, 3, 4, 6);
+
+        boolean isIdentical = isIdenticalTree(treeFirst, treeSecond);
+        System.out.println("Are three identical - " + isIdentical);
+
         //Task 12
         int[] arraySorted = {12, 13, 14, 15, 16};
         int searchedElement = binarySearch(18, arraySorted);
@@ -148,6 +156,25 @@ public class Solutions {
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
+    }
+
+    private static TreeNode getTreeNode(int rootValue, int left1Value, int right1Value, int left2Value, int right2Value) {
+        TreeNode left1 = new TreeNode(left1Value, null, null);
+        TreeNode right1 = new TreeNode(right1Value, new TreeNode(left2Value, null, null), new TreeNode(right2Value, null, null));
+
+        return new TreeNode(rootValue, left1, right1);
+    }
+
+    private static boolean isIdenticalTree(TreeNode firstTree, TreeNode secondTree) {
+        if (firstTree == null && secondTree == null) {
+            return true;
+        } else if (firstTree == null || secondTree == null) {
+            return false;
+        } else if (firstTree.value != secondTree.value) {
+            return false;
+        } else {
+            return isIdenticalTree(firstTree.left, secondTree.left) && isIdenticalTree(firstTree.right, secondTree.right);
+        }
     }
 
     private static int[][] rotate90Matrix(int[][] matrix) {
@@ -296,9 +323,9 @@ public class Solutions {
     }
 
     /**
-     *
      * Calculating factorials recursively without memoization is inefficient for large n because it involves recomputing
      * the fibonacci of numbers multiple times. By using memoization, each factorial value is computed only once.
+     *
      * @param num
      * @return
      */
