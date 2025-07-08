@@ -161,6 +161,22 @@ public class Solutions {
 
         System.out.println(System.lineSeparator());
 
+        //Task 18
+        Graph graph = new Graph();
+        graph.addVertex(1);
+        graph.addVertex(2);
+        graph.addVertex(3);
+        graph.addVertex(4);
+        graph.addVertex(5);
+        graph.addVertex(6);
+
+        graph.addNodes(1, Arrays.asList(2, 3));
+        graph.addNodes(2, Arrays.asList(4, 5));
+        graph.addNodes(6, Arrays.asList(5, 2));
+        graph.addNodes(6, Arrays.asList(8,12));
+
+        graph.dfsRecursive(graph, 1, new HashSet<>());
+
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
