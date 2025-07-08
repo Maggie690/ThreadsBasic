@@ -177,6 +177,24 @@ public class Solutions {
 
         graph.dfsRecursive(graph, 1, new HashSet<>());
 
+        System.out.println();
+
+        Graph graph1 = new Graph();
+        graph1.addVertex("A");
+        graph1.addVertex("B");
+        graph1.addVertex("C");
+        graph1.addVertex("D");
+        graph1.addVertex("E");
+        graph1.addVertex("F");
+
+        graph1.addNodes("A", Arrays.asList("B", "C"));
+        graph1.addNodes("B", Arrays.asList("D", "E"));
+        graph1.addNodes("F", Arrays.asList("E", "B"));
+        graph1.addNodes("F", Arrays.asList("U","M"));
+
+        graph1.dfsRecursive(graph1, "A", new HashSet<>());
+        System.out.println();
+
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));

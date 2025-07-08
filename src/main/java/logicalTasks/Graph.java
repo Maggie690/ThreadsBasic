@@ -2,23 +2,23 @@ package logicalTasks;
 
 import java.util.*;
 
-public class Graph {
+public class Graph <T>{
 
-    private Map<Integer, List<Integer>> graph;
+    private Map<T, List<T>> graph;
 
     public Graph() {
         this.graph = new HashMap<>();
     }
 
-    public void addVertex(Integer vertex) {
+    public void addVertex(T vertex) {
         this.graph.put(vertex, new ArrayList<>());
     }
 
-    public void addNode(Integer node, Integer newNode) {
+    public void addNode(T node, T newNode) {
         this.graph.get(node).add(newNode);
     }
 
-    public void addNodes(Integer node, List<Integer> newNodes) {
+    public void addNodes(T node, List<T> newNodes) {
         if (!graph.containsKey(node)) {
             graph.put(node, newNodes);
         } else {
@@ -28,11 +28,11 @@ public class Graph {
 
     }
 
-    public Map<Integer, List<Integer>> getGraph() {
+    public Map<T, List<T>> getGraph() {
         return this.graph;
     }
 
-    public void dfsRecursive(Graph graph, Integer node, Set<Integer> visited) {
+    public void dfsRecursive(Graph graph, T node, Set<T> visited) {
         if (visited == null) {
             visited = new HashSet<>();
         }
@@ -41,16 +41,16 @@ public class Graph {
             visited.add(node);
             System.out.print(node + "-");
 
-            List<Integer> neighbords = graph.getGraph().get(node);
+            List<T> neighbords = (List<T>) graph.getGraph().get(node);
             if (neighbords != null) {
-                for (Integer neighbor : neighbords) {
+                for (T neighbor : neighbords) {
                     dfsRecursive(graph, neighbor, visited);
                 }
             }
         }
     }
 
-    private void addNodeToExistingNode(Integer source, List<Integer> nodes) {
+    private void addNodeToExistingNode(T source, List<T> nodes) {
         for (var node : nodes) {
             if (graph.containsKey(node)) {
                 graph.get(node).add(source);
@@ -58,9 +58,9 @@ public class Graph {
         }
     }
 
-    private void mergeNodes(Integer node, List<Integer> newNodes) {
-        graph.merge(node, Arrays.asList(new Integer[]{node}),
-                (oldList, newList) -> new ArrayList<Integer>() {{
+    private void mergeNodes(T node, List<T> newNodes) {
+        graph.merge(node, List.of(node),
+                (oldList, newList) -> new ArrayList<T>() {{
                     addAll(graph.get(node));
                     addAll(newNodes);
                 }});
