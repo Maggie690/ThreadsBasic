@@ -1,13 +1,15 @@
 package logicalTasks;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 public class Solutions {
-
+    private static final Logger logger = LoggerFactory.getLogger(Solutions.class);
     private static final int MISSING_NUMBER_DEFAULT_VALUE = -1;
     public static final String PRE_ORDER = "Pre-order";
     public static final String POST_ORDER = "Post-order";
@@ -173,7 +175,7 @@ public class Solutions {
         graph.addNodes(1, Arrays.asList(2, 3));
         graph.addNodes(2, Arrays.asList(4, 5));
         graph.addNodes(6, Arrays.asList(5, 2));
-        graph.addNodes(6, Arrays.asList(8,12));
+        graph.addNodes(6, Arrays.asList(8, 12));
 
         graph.dfsRecursive(graph, 1, new HashSet<>());
 
@@ -190,18 +192,43 @@ public class Solutions {
         graph1.addNodes("A", Arrays.asList("B", "C"));
         graph1.addNodes("B", Arrays.asList("D", "E"));
         graph1.addNodes("F", Arrays.asList("E", "B"));
-        graph1.addNodes("F", Arrays.asList("U","M"));
+        graph1.addNodes("F", Arrays.asList("U", "M"));
 
         graph1.dfsRecursive(graph1, "A", new HashSet<>());
         System.out.println();
 
         System.out.println();
-        graph.dfsInteractive(graph,1);
-        graph1.dfsInteractive(graph1,"A");
+        graph.dfsInteractive(graph, 1);
+        graph1.dfsInteractive(graph1, "A");
+
+        //Task 19
+        List<String> rectangles = List.of("8,1", "5,10", "0.2,30", "5,20", "3,4", "a,12");
+        double largestArea = findLargestArea(rectangles);
+        System.out.println("\nThe largest area is " + largestArea);
 
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
+    }
+
+    private static double findLargestArea(List<String> rectangles) {
+        double largestArea = 0;
+        for (var rectangle : rectangles) {
+            String[] sizes = rectangle.split(",");
+            try {
+                double height = Double.parseDouble(sizes[0]);
+                double width = Double.parseDouble(sizes[1]);
+                double area = height * width;
+
+                if (largestArea < area) {
+                    largestArea = area;
+                }
+            } catch (NumberFormatException ex) {
+                logger.error("Contained sizes is not represented by Number(s) - " + Arrays.toString(sizes));
+            }
+
+        }
+        return largestArea;
     }
 
     private static TreeNode getTreeNode(int rootValue, int left1Value, int right1Value, int left2Value, int right2Value) {
