@@ -2,7 +2,7 @@ package logicalTasks;
 
 import java.util.*;
 
-public class Graph <T>{
+public class Graph<T> {
 
     private Map<T, List<T>> graph;
 
@@ -22,7 +22,7 @@ public class Graph <T>{
         if (!graph.containsKey(node)) {
             graph.put(node, newNodes);
         } else {
-            addNodeToExistingNode(node, newNodes);
+            addNodeOrVertex(node, newNodes);
             mergeNodes(node, newNodes);
         }
 
@@ -50,10 +50,33 @@ public class Graph <T>{
         }
     }
 
-    private void addNodeToExistingNode(T source, List<T> nodes) {
+    public void dfsInteractive(Graph graph, T startNode) {
+        Set<T> visited = new HashSet<>();
+        Stack<T> stack = new Stack<>();
+        stack.push(startNode);
+
+        while (!stack.isEmpty()) {
+            T node = stack.pop();
+            if (!visited.contains(node)) {
+                System.out.print(node + " ");
+                visited.add(node);
+            }
+
+            List<T> neighborhoods = (List<T>) graph.getGraph().get(node);
+            for (T neighbor : neighborhoods) {
+                if (!visited.contains(neighbor)) {
+                    stack.push(neighbor);
+                }
+            }
+        }
+    }
+
+    private void addNodeOrVertex(T source, List<T> nodes) {
         for (var node : nodes) {
             if (graph.containsKey(node)) {
                 graph.get(node).add(source);
+            } else {
+                graph.put(node, new ArrayList<>());
             }
         }
     }

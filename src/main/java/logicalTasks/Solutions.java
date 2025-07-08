@@ -195,6 +195,10 @@ public class Solutions {
         graph1.dfsRecursive(graph1, "A", new HashSet<>());
         System.out.println();
 
+        System.out.println();
+        graph.dfsInteractive(graph,1);
+        graph1.dfsInteractive(graph1,"A");
+
         //Task 20
         TreeMap<String, Integer> countLetters = countLetters(word);
         countLetters.forEach((key, value) -> System.out.println(key + " - " + value));
